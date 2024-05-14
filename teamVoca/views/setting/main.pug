@@ -1,0 +1,55 @@
+//- extends ../layout
+
+block content 
+    link(rel="stylesheet", href="/css/setting/main.css")
+    script(src="/js/setting/main.js")
+    body
+        div.back
+            a(href="/voca") ◀
+        div.bg
+            div.pop
+                span.close ✕
+                if USER.m_pro === "1"
+                    div.content
+                        p.top 정말요?
+                        p.mid 나만의 단어장 만들기,
+                        p.mid 정말 취소하시게요?
+                        div.card
+                            p 👑프리미엄을
+                            p.dis  
+                            p 유지하세요!
+                if USER.m_pro === "0"
+                    div.content
+                        p.top ⏰지금만 특가
+                        p.mid 나만의 단어장 만들기,
+                        p.mid 오늘 시작하면 딱이에요
+                        div.card
+                            p -40%
+                            p.dis ₩6,000
+                            p ➔ ₩3,600 
+                div.btn(data-id=USER.m_id)
+                    if USER.m_pro === "1"
+                        button.revoke 구독취소
+                    if USER.m_pro === "0"
+                        button.buy 구매하기
+        section.body
+            section.user
+                img.profile(src=`${USER.m_image?`/uploads/${USER.m_image}`:"/images/bear.png"}`  width="100px")
+                div.info
+                    span.user #{USER.m_nick} 
+                    p 님 안녕하세요
+                input.update(type="button" value="프로필 수정" data-id=USER.m_id)
+            ul
+                li.toggle 
+                    p.off 비공개 계정 전환
+                    label.switch
+                        input.check(type="checkbox")
+                        span.slider.round
+                li.pro 프로 멤버십
+                    label.proswitch
+                        input.pro(type="checkbox")
+                        p.badge 👑프리미엄
+                li.tuto 튜토리얼 다시보기
+                li.logout 로그아웃
+                li.drop(data-id=USER.m_id) 회원탈퇴
+                
